@@ -17,7 +17,7 @@ def monitor_folders():
     observer.start()
     try:
         while True:
-            time.sleep(1)
+            pass
     except KeyboardInterrupt:
         print("Stopping folder monitor...")
         observer.stop()
