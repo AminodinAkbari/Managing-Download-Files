@@ -13,6 +13,7 @@ class DownloadHandler(FileSystemEventHandler):
         self.image_folder = FoldersControl.image_folder
         self.browsers_zip_folder = FoldersControl.browsers_zip_folder
         self.other_folder = FoldersControl.other_folder
+        self.zip_folder = FoldersControl.zip_folder
         
         self.telegram_downloads_folder = FoldersControl.telegram_downloads_folder
     
@@ -26,7 +27,7 @@ class DownloadHandler(FileSystemEventHandler):
             print(f"Detected file: {file_path}")
             
             # Check if file is still being downloaded (skip temporary files)
-            if filename.endswith('.crdownload') or filename.endswith('.part'):
+            if filename.endswith('crdownload') or filename.endswith('.part'):
                 continue  # Skip incomplete downloads
             
             extension_to_folder = {
@@ -39,8 +40,10 @@ class DownloadHandler(FileSystemEventHandler):
             # Move based on file type
             for extension , folder in extension_to_folder.items():
                 if filename.endswith(extension):
+                    print("it's a common")
                     FoldersControl.move_file(file_path , folder)
                 else:
+                    print("It's going to others")
                     # Other types of files will moved to 'other' folder path
                     FoldersControl.move_file(file_path , self.other_folder)
 
